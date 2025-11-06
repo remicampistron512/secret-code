@@ -4,9 +4,12 @@ import java.util.ArrayList;
 public class secretCode {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Initialisation des valeurs
+		// le code secret que l'on doit deviner
 		String secretCode = "1246";
+		// le scanner pour les inputs utilisateurs
 		Scanner scan = new Scanner(System.in);
+		// la partie est en cours
 		boolean play = true;
 		
 		while(play) {
@@ -21,6 +24,7 @@ public class secretCode {
 			
 			placedOrUnplacedChar(secretCodeArr, proposedCodeArr, placedChars, unplacedChars);
 			
+			// Le tableau des charactere placés a 4 éléments, donc le code est trouvé
 			if(placedChars.size() == 4) {
 				System.out.println("Bravo ! Vous avez trouvé le code : " + secretCode );
 				play = false;
@@ -40,10 +44,14 @@ public class secretCode {
 	}
 	
 	private static String fourDigitsInput(Scanner scan) {
+		/* Récupère et vérifie l'entrée utilisateur*/
 	    while (true) {
 	        String proposedCode = scan.nextLine().trim();
+	        // la chaine entrée fait 4 characteres
 	        if (proposedCode.length() == 4) {
+	        	// flag pour déterminer si l'input est valide
 	            boolean isValidInput = true;
+	            // pour chaque charactere on vérifie s'il s'agit bien d'un chffre
 	            for (int i = 0; i < 4; i++) {
 	            	if (!Character.isDigit(proposedCode.charAt(i))) { 
 	            		isValidInput = false; 
@@ -59,16 +67,16 @@ public class secretCode {
 	
 	public static void placedOrUnplacedChar(char[] secretCodeArr, char[] proposedCodeArr,
 			ArrayList<Character> placedChars, ArrayList<Character> unplacedChars) {
+		/* Détermine si les characteres sont présents et sont soit bien ou mal placés, 
+		 * ils sont stockés dans leurs Arraylist respectifs
+		 */
 		for(int i=0;i<proposedCodeArr.length;i++) {
 			for(int j=0;j<secretCodeArr.length;j++) {
-				if(proposedCodeArr[i] == secretCodeArr[j] ) {
-					
-					if (i == j) {
-						
+				if(proposedCodeArr[i] == secretCodeArr[j] ) {					
+					if (i == j) {						
 						//le charactere est placé au bon endroit
 						placedChars.add(proposedCodeArr[i]);
-					} else {
-						
+					} else {						
 						// le charactere existe dans la liste mais n'est pas bien placé
 						unplacedChars.add(proposedCodeArr[i]);
 					}
